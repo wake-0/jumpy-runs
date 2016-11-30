@@ -1,5 +1,8 @@
 class Map
-    @ame = 'Default'
+    
+    def initialize
+      @name='Default'
+    end
 
     def getName
         @name 
