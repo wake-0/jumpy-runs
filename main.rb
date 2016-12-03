@@ -37,6 +37,14 @@ class JumpyRuns < Gosu::Window
             @movePlayer1.updateDelta(-@movingSpeed, 0)
             @movePlayer2.updateDelta(-@movingSpeed, 0)
             @movePlayer3.updateDelta(-@movingSpeed, 0)
+        elsif self.button_down? Gosu::KbDown
+            @movePlayer1.updateDelta(0, @movingSpeed)
+            @movePlayer2.updateDelta(0, @movingSpeed)
+            @movePlayer3.updateDelta(0, @movingSpeed)
+        elsif self.button_down? Gosu::KbUp
+            @movePlayer1.updateDelta(0, -@movingSpeed)
+            @movePlayer2.updateDelta(0, -@movingSpeed)
+            @movePlayer3.updateDelta(0, -@movingSpeed)
         else
             @movePlayer1.updateDelta(0, 0)
             @movePlayer2.updateDelta(0, 0)
