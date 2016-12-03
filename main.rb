@@ -4,21 +4,24 @@ require 'gosu'
 # For import the file name is used instead of the class name
 require_relative 'lib/player'
 require_relative 'lib/map'
+require_relative 'lib/move'
 
 class JumpyRuns < Gosu::Window
 
     def initialize width = 800, height = 600, fullscreen = false
         super
         self.caption = "Jumpy Runs"
-
-        @width = @height = 32
-        @player = Gosu::Image.load_tiles self, "resources/characters.png", @width, @height, fullscreen
-        @frame = 0
-        @direction = :right
-        @moving = false
-        @x = self.width/2 - @width/2
-        @y = self.height/2 - @height/2  
+        $window = self
         @movingSpeed = 10
+        
+        @player1 = Player.new(1)
+        @movePlayer1 = Move.new(30 - 16, 30 - 16)
+
+        @player2 = Player.new(2)
+        @movePlayer2 = Move.new(30 - 16, 80 - 16)
+
+        @player3 = Player.new(3)
+        @movePlayer3 = Move.new(30 - 16, 130 - 16)
     end
 
     def button_down id
@@ -27,27 +30,24 @@ class JumpyRuns < Gosu::Window
 
     def update
         if self.button_down? Gosu::KbRight
-            @direction = :right
-            @x += @movingSpeed
-            @moving = true
-            @frame += 1
+            @movePlayer1.updateDelta(@movingSpeed, 0)
+            @movePlayer2.updateDelta(@movingSpeed, 0)
+            @movePlayer3.updateDelta(@movingSpeed, 0)
         elsif self.button_down? Gosu::KbLeft
-            @direction = :left
-            @x -= @movingSpeed
-            @moving = true
-            @frame += 1
+            @movePlayer1.updateDelta(-@movingSpeed, 0)
+            @movePlayer2.updateDelta(-@movingSpeed, 0)
+            @movePlayer3.updateDelta(-@movingSpeed, 0)
+        else
+            @movePlayer1.updateDelta(0, 0)
+            @movePlayer2.updateDelta(0, 0)
+            @movePlayer3.updateDelta(0, 0)
         end
     end
 
     def draw
-        # first line contains 23 character images - 5 climbing images
-        f = @frame % 18
-        image = @player[f]
-        if @direction == :right
-            image.draw @x, @y, 1, 2, 2
-        elsif @direction == :left
-            image.draw @x + 2*@width, @y, 1, -2, 2
-        end
+        @player1.draw(@movePlayer1)
+        @player2.draw(@movePlayer2)
+        @player3.draw(@movePlayer3)
     end
 end
 
