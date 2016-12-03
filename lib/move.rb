@@ -35,6 +35,10 @@ class Move
             @direction = :right
         elsif @newX > x
             @direction = :left
+        elsif @newY < y
+            @direction = :down
+        elsif @newY > y
+            @direction = :up
         end
     end
 
