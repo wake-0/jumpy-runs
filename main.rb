@@ -53,10 +53,24 @@ class JumpyRuns < Gosu::Window
     end
 
     def draw
+        draw_window()
         @player1.draw(@movePlayer1)
         @player2.draw(@movePlayer2)
         @player3.draw(@movePlayer3)
     end
+
+    def draw_window
+        @color ||= Gosu::Color.new(0xaaaaccaa)
+        @color2 ||= Gosu::Color.new(0xaa123452)
+        draw_quad(
+            0,      0,        @color,
+            width,  0,        @color,
+            0,      height,   @color2,
+            width,  height,   @color2,
+            0
+        )
+    end
+        
 end
 
 JumpyRuns.new.show
