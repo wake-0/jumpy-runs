@@ -12,7 +12,7 @@ class JumpyRuns < Gosu::Window
         super
         self.caption = "Jumpy Runs"
         $window = self
-        @movingSpeed = 10
+        @movingSpeed = 7
         
         @player1 = Player.new(1)
         @movePlayer1 = Move.new(30 - 16, 30 - 16)

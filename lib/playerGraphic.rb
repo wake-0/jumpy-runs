@@ -26,10 +26,14 @@ class PlayerGraphic < Component
             @frame = @characterOffset + (@frame + 1) % 18
         end
 
+        if move.direction == :right || move.direction == :left 
+            @moveDirection = move.direction
+        end
+        
         image = @image[@frame]
-        if move.direction == :right
+        if @moveDirection == :right
             image.draw move.xPos, move.yPos, 1, @size, @size
-        elsif move.direction == :left
+        elsif @moveDirection == :left
             image.draw move.xPos + 2*@width, move.yPos, 1, -@size, @size
         end
     end
