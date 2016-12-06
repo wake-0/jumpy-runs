@@ -4,7 +4,6 @@ class PlayerGraphic < Component
         super(gameObject)
         @width = @height = 32
         @image = Gosu::Image.load_tiles $window, "resources/characters.png", @width, @height, false
-        @bg = Gosu::Image.load_tiles $window, "resources/characters.png", @width, @height, false
         @character = character
         setCharacterOffset
         @frame = @characterOffset
