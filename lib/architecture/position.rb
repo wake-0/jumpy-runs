@@ -37,6 +37,6 @@ class Position
     end
 
     def hasChanged
-        @x != @oldX || @y != @oldY
+        @x != @oldX # || @y != @oldY
     end
 end

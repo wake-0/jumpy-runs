@@ -6,11 +6,10 @@ class PlayerPhysic < PhysicalComponent
 
     attr_reader :position, :input
 
-    def initialize(position, input)
-        super(position, input)
+    def initialize(position, input, playerGraphic)
+        super(position, input, playerGraphic)
         @input = input
-        @graphity = 10.0
-        @isFalling = false
+        @graphity = 5
     end
 
     def update
@@ -23,23 +22,18 @@ class PlayerPhysic < PhysicalComponent
             deltaX = -@input.delta
             deltaY = @isFalling ? 3 : 0
         elsif @input.direction == :top
-            jump
+            deltaX = 0
+            deltaY =  -@input.delta * 2
         elsif @input.direction == :none
             deltaX = 0
             deltaY = 0
         end
-
         # Do nothing when down is pressed
         # @position.updateDelta(0, @input.delta) if @input.direction == :down
 
+        # This is used for the graphity
+        deltaY = deltaY + @graphity unless $map.groundReached?(@position.x, @position.y + @graphicalComponent.height)
         @position.updateDelta(deltaX, deltaY)
-    end
-
-    private 
-    def jump
-        @position.updateDelta(0, -@input.delta*2)
-        # Add logic for using graphity
-        # @isFalling = true 
     end
 
 end
