@@ -16,11 +16,12 @@ class JumpyRuns < Gosu::Window
         @movingSpeed = 7
         
         @input = Input.new(:none, 0)
-        @playerPosition = Position.new(30 - 16, 30 - 16, :right)
-        @player = Player.new(@playerPosition, @input, 1)
 
         @mapPosition = Position.new(0, 0, :none)
         @map = Map.new(@mapPosition, @input)
+
+        @playerPosition = Position.new(30 - 16, $window.height - 96, :right)
+        @player = Player.new(@playerPosition, @input, 1)
     end
 
     def button_down id

@@ -10,14 +10,36 @@ class PlayerPhysic < PhysicalComponent
         super(position, input)
         @input = input
         @graphity = 10.0
+        @isFalling = false
     end
 
     def update
-        @position.updateDelta(@input.delta, 0) if @input.direction == :right
-        @position.updateDelta(-@input.delta, 0) if @input.direction == :left
-        @position.updateDelta(0, @input.delta) if @input.direction == :down
-        @position.updateDelta(0, -@input.delta) if @input.direction == :top
-        @position.updateDelta(0,0) if @input.direction == :none
+        deltaX = 0
+        deltaY = 0
+        if @input.direction == :right
+            deltaX = @input.delta
+            deltaY = @isFalling ? 3 : 0
+        elsif @input.direction == :left
+            deltaX = -@input.delta
+            deltaY = @isFalling ? 3 : 0
+        elsif @input.direction == :top
+            jump
+        elsif @input.direction == :none
+            deltaX = 0
+            deltaY = 0
+        end
+
+        # Do nothing when down is pressed
+        # @position.updateDelta(0, @input.delta) if @input.direction == :down
+
+        @position.updateDelta(deltaX, deltaY)
+    end
+
+    private 
+    def jump
+        @position.updateDelta(0, -@input.delta*2)
+        # Add logic for using graphity
+        # @isFalling = true 
     end
 
 end
