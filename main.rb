@@ -2,9 +2,10 @@
 require 'gosu'
 
 # For import the file name is used instead of the class name
-require_relative 'lib/player'
-require_relative 'lib/map'
-require_relative 'lib/move'
+require './lib/entities/player/player'
+require './lib/entities/map/map'
+require './lib/architecture/position'
+require './lib/architecture/input'
 
 class JumpyRuns < Gosu::Window
 
@@ -14,14 +15,12 @@ class JumpyRuns < Gosu::Window
         $window = self
         @movingSpeed = 7
         
-        @player1 = Player.new(1)
-        @movePlayer1 = Move.new(30 - 16, 30 - 16)
+        @input = Input.new(:none, 0)
+        @playerPosition = Position.new(30 - 16, 30 - 16, :right)
+        @player = Player.new(@playerPosition, @input, 1)
 
-        @player2 = Player.new(2)
-        @movePlayer2 = Move.new(30 - 16, 80 - 16)
-
-        @player3 = Player.new(3)
-        @movePlayer3 = Move.new(30 - 16, 130 - 16)
+        @mapPosition = Position.new(0, 0, :none)
+        @map = Map.new(@mapPosition, @input)
     end
 
     def button_down id
@@ -30,47 +29,24 @@ class JumpyRuns < Gosu::Window
 
     def update
         if self.button_down? Gosu::KbRight
-            @movePlayer1.updateDelta(@movingSpeed, 0)
-            @movePlayer2.updateDelta(@movingSpeed, 0)
-            @movePlayer3.updateDelta(@movingSpeed, 0)
+            @input.update(:right, @movingSpeed)
         elsif self.button_down? Gosu::KbLeft
-            @movePlayer1.updateDelta(-@movingSpeed, 0)
-            @movePlayer2.updateDelta(-@movingSpeed, 0)
-            @movePlayer3.updateDelta(-@movingSpeed, 0)
+            @input.update(:left, @movingSpeed)
         elsif self.button_down? Gosu::KbDown
-            @movePlayer1.updateDelta(0, @movingSpeed)
-            @movePlayer2.updateDelta(0, @movingSpeed)
-            @movePlayer3.updateDelta(0, @movingSpeed)
+            @input.update(:down, @movingSpeed)
         elsif self.button_down? Gosu::KbUp
-            @movePlayer1.updateDelta(0, -@movingSpeed)
-            @movePlayer2.updateDelta(0, -@movingSpeed)
-            @movePlayer3.updateDelta(0, -@movingSpeed)
+            @input.update(:top, @movingSpeed)
         else
-            @movePlayer1.updateDelta(0, 0)
-            @movePlayer2.updateDelta(0, 0)
-            @movePlayer3.updateDelta(0, 0)
+            @input.update(:none, 0)
         end
+
+        @player.update
     end
 
     def draw
-        draw_window()
-        @player1.draw(@movePlayer1)
-        @player2.draw(@movePlayer2)
-        @player3.draw(@movePlayer3)
+        @map.draw
+        @player.draw
     end
-
-    def draw_window
-        @color ||= Gosu::Color.new(0xaaaaccaa)
-        @color2 ||= Gosu::Color.new(0xaa123452)
-        draw_quad(
-            0,      0,        @color,
-            width,  0,        @color,
-            0,      height,   @color2,
-            width,  height,   @color2,
-            0
-        )
-    end
-        
 end
 
 JumpyRuns.new.show
