@@ -12,16 +12,15 @@ class JumpyRuns < Gosu::Window
     def initialize width = 800, height = 600, fullscreen = false
         super
         self.caption = "Jumpy Runs"
-        $window = self
         @movingSpeed = 7
         
         @input = Input.new(:none, 0)
 
         @mapPosition = Position.new(0, 0, :none)
-        @map = Map.new(@mapPosition, @input)
+        $map = Map.new(@mapPosition, @input, self)
 
-        @playerPosition = Position.new(30 - 16, $window.height - 96, :right)
-        @player = Player.new(@playerPosition, @input, 1)
+        @playerPosition = Position.new(30 - 16, self.height - 96, :right)
+        @player = Player.new(@playerPosition, @input, self, 1)
     end
 
     def button_down id
@@ -45,7 +44,7 @@ class JumpyRuns < Gosu::Window
     end
 
     def draw
-        @map.draw
+        $map.draw
         @player.draw
     end
 end
