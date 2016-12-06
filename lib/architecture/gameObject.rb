@@ -5,13 +5,14 @@ class GameObject
     
     attr_reader :position, :position
 
-    def initialize(position, input)
+    def initialize(position, input, window)
         # These are the components of the game object
         # for example the graphic, the logic, the sound
         @physicalComponents = []
         @graphicalComponents = []
         @position = position
         @input = input
+        @window = window
     end
 
     def draw
