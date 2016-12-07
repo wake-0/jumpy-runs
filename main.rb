@@ -36,6 +36,7 @@ class JumpyRuns < Gosu::Window
         else
             @inputX.update(:none, 0)
         end
+        
         if self.button_down? Gosu::KbDown
             @inputY.update(:down, @movingSpeed)
         elsif self.button_down? Gosu::KbUp

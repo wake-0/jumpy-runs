@@ -8,7 +8,8 @@ class PlayerPhysic < PhysicalComponent
 
     def initialize(position, inputX, inputY, playerGraphic)
         super(position, inputX, playerGraphic)
-        @input = input
+        @inputX = inputX
+        @inputY = inputY
 
         @graphity = 8
         @jumpHeight = 150
