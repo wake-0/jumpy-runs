@@ -6,8 +6,8 @@ class PlayerPhysic < PhysicalComponent
 
     attr_reader :position, :input
 
-    def initialize(position, input, playerGraphic)
-        super(position, input, playerGraphic)
+    def initialize(position, inputX, inputY, playerGraphic)
+        super(position, inputX, playerGraphic)
         @input = input
 
         @graphity = 8
@@ -15,24 +15,24 @@ class PlayerPhysic < PhysicalComponent
         @jumpSpeed = 3
         @isJumping = false
         @highestPointReached = false
+        
     end
 
     def update
         deltaX = 0
         deltaY = 0
         
-        if @input.direction == :right
-            deltaX = @input.delta
-            deltaY = 0
-        elsif @input.direction == :left
-            deltaX = -@input.delta
-            deltaY = 0
-        elsif @input.direction == :top
+        if @inputX.direction == :right
+            deltaX = @inputX.delta
+        elsif @inputX.direction == :left
+            deltaX = -@inputX.delta
+        elsif @inputX.direction == :none
+            deltaX = 0
+        end
+        if @inputY.direction == :top
             @isJumping = true
-            deltaX = 0
             deltaY = -@input.delta * @jumpSpeed unless @highestPointReached  
-        elsif @input.direction == :none
-            deltaX = 0
+        else 
             deltaY = 0
         end
         # Do nothing when down is pressed

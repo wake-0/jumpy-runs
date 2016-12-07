@@ -14,13 +14,14 @@ class JumpyRuns < Gosu::Window
         self.caption = "Jumpy Runs"
         @movingSpeed = 7
         
-        @input = Input.new(:none, 0)
+        @inputX = Input.new(:none, 0)
+        @inputY = Input.new(:none, 0)
 
         @mapPosition = Position.new(0, 0, :none)
-        $map = Map.new(@mapPosition, @input, self)
+        $map = Map.new(@mapPosition, @inputX, @inputY, self)
 
         @playerPosition = Position.new(30 - 16, self.height - 96, :right)
-        @player = Player.new(@playerPosition, @input, self, 1)
+        @player = Player.new(@playerPosition, @inputX, @inputY, self, 1)
     end
 
     def button_down id
@@ -29,15 +30,18 @@ class JumpyRuns < Gosu::Window
 
     def update
         if self.button_down? Gosu::KbRight
-            @input.update(:right, @movingSpeed)
+            @inputX.update(:right, @movingSpeed)
         elsif self.button_down? Gosu::KbLeft
-            @input.update(:left, @movingSpeed)
-        elsif self.button_down? Gosu::KbDown
-            @input.update(:down, @movingSpeed)
-        elsif self.button_down? Gosu::KbUp
-            @input.update(:top, @movingSpeed)
+            @inputX.update(:left, @movingSpeed)
         else
-            @input.update(:none, 0)
+            @inputX.update(:none, 0)
+        end
+        if self.button_down? Gosu::KbDown
+            @inputY.update(:down, @movingSpeed)
+        elsif self.button_down? Gosu::KbUp
+            @inputY.update(:top, @movingSpeed)
+        else
+            @inputY.update(:none, 0)
         end
 
         @player.update

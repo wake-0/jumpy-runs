@@ -5,8 +5,8 @@ require_relative 'mapGraphic'
 
 class Map < GameObject
 
-    def initialize (position, input, window)
-        super(position, input, window)
+    def initialize (position, inputX, inputY, window)
+        super(position, inputX, inputY, window)
 
         @mapGraphic = MapGraphic.new(position, window)
         addComponent(@mapGraphic)
