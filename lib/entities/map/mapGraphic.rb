@@ -33,6 +33,10 @@ class MapGraphic < GraphicalComponent
         end
     end
 
+    def inRange?(x, y)
+        true
+    end
+
     def getGround(x)
         @lowerBorder
     end
