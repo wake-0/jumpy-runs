@@ -49,7 +49,7 @@ class PlayerPhysic < PhysicalComponent
     end
 
     def distanceToGround
-        groundY = $map.getGround(@position.x)
+        groundY = $map.getGround(@position.x, @position.y)
         playerY = @position.y + @graphicalComponent.height
         groundY - playerY
     end
