@@ -32,7 +32,7 @@ class PlayerPhysic < PhysicalComponent
         end
         if @inputY.direction == :top
             @isJumping = true
-            deltaY = -@input.delta * @jumpSpeed unless @highestPointReached  
+            deltaY = -@inputY.delta * @jumpSpeed unless @highestPointReached  
         else 
             deltaY = 0
         end
