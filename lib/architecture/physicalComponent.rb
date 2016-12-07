@@ -2,9 +2,10 @@ require_relative 'component'
 
 class PhysicalComponent < Component
 
-    def initialize(position, input, graphicalComponent)
+    def initialize(position, inputX, inputY, graphicalComponent)
         super(position)
-        @input = input
+        @inputX = inputX
+        @inputY = inputY
         @graphicalComponent = graphicalComponent
     end
 

@@ -7,10 +7,7 @@ class PlayerPhysic < PhysicalComponent
     attr_reader :position, :input
 
     def initialize(position, inputX, inputY, playerGraphic)
-        super(position, inputX, playerGraphic)
-        @inputX = inputX
-        @inputY = inputY
-
+        super(position, inputX, inputY, playerGraphic)
         @gravity = 8
         @jumpHeight = 150
         @jumpSpeed = 3

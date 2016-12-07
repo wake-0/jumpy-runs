@@ -15,22 +15,8 @@ class MapGraphic < GraphicalComponent
     end
 
     def draw
-        # General background color
-        @window.draw_quad(
-            0,              0,               @color,
-            @window.width,  0,               @color,
-            0,              @window.height,  @color2,
-            @window.width,  @window.height,  @color2,
-            0
-        )
-
-        parts = 0
-        frame = 4
-        image = @image[frame]
-        while @window.width - parts*(@width*@size) > 0
-            image.draw parts*(@width*@size), @lowerBorder, 1, @size, @size
-            parts = parts + 1
-        end
+        drawBackgroundColor
+        drawGround
     end
 
     def inRange?(x, y)
@@ -39,5 +25,27 @@ class MapGraphic < GraphicalComponent
 
     def getGround(x)
         @lowerBorder
+    end
+
+    private
+    def drawBackgroundColor
+        # General background color
+        @window.draw_quad(
+            0,              0,               @color,
+            @window.width,  0,               @color,
+            0,              @window.height,  @color2,
+            @window.width,  @window.height,  @color2,
+            0
+        )
+    end
+
+    def drawGround
+        parts = 0
+        frame = 4
+        image = @image[frame]
+        while @window.width - parts*(@width*@size) > 0
+            image.draw parts*(@width*@size), @lowerBorder, 1, @size, @size
+            parts = parts + 1
+        end
     end
 end
