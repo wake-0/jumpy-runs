@@ -12,8 +12,8 @@ class Map < GameObject
         addComponent(@mapGraphic)
     end
 
-    def groundReached?(x, y)
-        @mapGraphic.groundReached?(x, y)
+    def getGround(x)
+        @mapGraphic.getGround(x)
     end
 
 end

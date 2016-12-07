@@ -33,8 +33,7 @@ class MapGraphic < GraphicalComponent
         end
     end
 
-    def groundReached?(x, y)
-        y >= @lowerBorder
+    def getGround(x)
+        @lowerBorder
     end
-
 end

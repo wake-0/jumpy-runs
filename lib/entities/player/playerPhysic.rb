@@ -32,7 +32,10 @@ class PlayerPhysic < PhysicalComponent
         # @position.updateDelta(0, @input.delta) if @input.direction == :down
 
         # This is used for the graphity
-        deltaY = deltaY + @graphity unless $map.groundReached?(@position.x, @position.y + @graphicalComponent.height)
+        groundY = $map.getGround(@position.x)
+        playerY = @position.y + @graphicalComponent.height
+        deltaY = deltaY + (groundY - playerY) if playerY + @graphity > groundY 
+        deltaY = deltaY + @graphity if deltaY == 0 && playerY + @graphity < groundY
         @position.updateDelta(deltaX, deltaY)
     end
 
