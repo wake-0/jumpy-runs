@@ -11,12 +11,11 @@ class PlayerPhysic < PhysicalComponent
         @inputX = inputX
         @inputY = inputY
 
-        @graphity = 8
+        @gravity = 8
         @jumpHeight = 150
         @jumpSpeed = 3
         @isJumping = false
         @highestPointReached = false
-        
     end
 
     def update
@@ -30,22 +29,15 @@ class PlayerPhysic < PhysicalComponent
         elsif @inputX.direction == :none
             deltaX = 0
         end
+
         if @inputY.direction == :top
             @isJumping = true
             deltaY = -@inputY.delta * @jumpSpeed unless @highestPointReached  
-        else 
-            deltaY = 0
         end
         # Do nothing when down is pressed
         # @position.updateDelta(0, @input.delta) if @input.direction == :down
 
-        # Used for the graphity
-        deltaY = deltaY + distanceToGround if @highestPointReached && distanceToGround <= @graphity 
-        deltaY = deltaY + @graphity if @highestPointReached && distanceToGround > @graphity
-        @highestPointReached = false if distanceToGround == 0
-        @highestPointReached = true if distanceToGround >= @jumpHeight || !@isJumping
-        @isJumping = false
-
+        deltaY = deltaY + gravityDelta
         @position.updateDelta(deltaX, deltaY)
     end
 
@@ -53,6 +45,19 @@ class PlayerPhysic < PhysicalComponent
         groundY = $map.getGround(@position.x, @position.y)
         playerY = @position.y + @graphicalComponent.height
         groundY - playerY
+    end
+
+    private
+    def gravityDelta
+        gravityDelta = 0
+        gravityDelta = distanceToGround if @highestPointReached && distanceToGround <= @gravity 
+        gravityDelta = @gravity if @highestPointReached && distanceToGround > @gravity
+
+        # This is used to check if the highest point while jumping was reached
+        @highestPointReached = false if distanceToGround == 0
+        @highestPointReached = true if distanceToGround >= @jumpHeight || !@isJumping
+        @isJumping = false
+        gravityDelta
     end
 
 end
