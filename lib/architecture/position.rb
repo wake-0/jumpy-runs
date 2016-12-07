@@ -2,7 +2,7 @@ class Position
 
     attr_reader :x, :y, :direction
 
-    def initialize(x, y, direction)
+    def initialize(x, y, direction = :none)
         @x = x
         @y = y
         @direction = direction

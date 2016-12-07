@@ -13,20 +13,20 @@ class ObstacleGraphic < GraphicalComponent
         @image = Gosu::Image.load_tiles window, './resources/sheet.png', @width, @height, false
         
         @size = 2
-        @xStart = 100
+        @xStart = position.x
         @xEnd = @xStart + @width * @size
-        @yStart = 480
+        @yStart = position.y
         @yEnd = @yStart + @height * @size
     end
 
     def draw
         frame = 12
         image = @image[frame]
-        image.draw @xStart, 480, 1, @size, @size
+        image.draw @xStart, @yStart, 1, @size, @size
     end
 
-    def inRange?(x, y)
-        x <= @xEnd && x >= @xStart && y <= @yEnd && y >= @yStart
+    def inRange?(x)
+        x <= @xEnd && x >= @xStart
     end
 
     def getGround(x)

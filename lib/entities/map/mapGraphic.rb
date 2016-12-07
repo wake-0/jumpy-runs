@@ -11,7 +11,11 @@ class MapGraphic < GraphicalComponent
         @height = 16
         @image = Gosu::Image.load_tiles window, './resources/sheet.png', @width, @height, false
         @size = 2
-        @lowerBorder = window.height - (@height*@size)
+
+        @xStart = 0
+        @xEnd = window.width
+        @yStart = window.height - (@height*@size)
+        @yEnd = window.height
     end
 
     def draw
@@ -19,12 +23,12 @@ class MapGraphic < GraphicalComponent
         drawGround
     end
 
-    def inRange?(x, y)
-        true
+    def inRange?(x)
+        x >= @xStart && x <= @xEnd
     end
 
     def getGround(x)
-        @lowerBorder
+        @yStart
     end
 
     private
@@ -44,7 +48,7 @@ class MapGraphic < GraphicalComponent
         frame = 4
         image = @image[frame]
         while @window.width - parts*(@width*@size) > 0
-            image.draw parts*(@width*@size), @lowerBorder, 1, @size, @size
+            image.draw parts*(@width*@size), @yStart, 1, @size, @size
             parts = parts + 1
         end
     end
