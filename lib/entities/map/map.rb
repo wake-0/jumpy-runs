@@ -48,7 +48,7 @@ class Map < GameObject
             gc = @graphical_components[i]
             if gc.in_range?(rectangle)
                 min_value = @graphical_components[min_index].get_ground(rectangle)
-                difference = gc.get_ground(rectangle) - rectangle.top_left_y
+                difference = gc.get_ground(rectangle) - rectangle.bottom_right_y
                 min_index = i if difference >= 0 && difference < min_value
             end
         }
