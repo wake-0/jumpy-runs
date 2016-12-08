@@ -1,24 +1,31 @@
 require './lib/architecture/graphicalComponent'
 require './lib/architecture/position'
+require './lib/architecture/rectangle'
 
 class PlayerGraphic < GraphicalComponent
 
     def initialize(position, window, character = 1)
         super(position, window)
-        @width = @height = 32
+
+        @width = 32
+        @height = 32
+        @size = 2
+
         @image = Gosu::Image.load_tiles @window, './resources/characters.png', @width, @height, false
+        # Abstract representation of the graphical component
+        @rectangle = Rectangle.new(position, @width*@size, @height*@size)
+        # Character selection
         @character = character
         set_character_offset
         @frame = @character_offset
-        @size = 2
     end
 
     def height
-        @height * @size
+        @rectangle.height
     end
 
     def width
-        @width * @size
+        @rectangle.width
     end
 
     def draw
@@ -40,6 +47,8 @@ class PlayerGraphic < GraphicalComponent
         elsif @position_direction == :left
             image.draw position.x + width, position.y, 1, -@size, @size
         end
+
+        @rectangle.draw(@window) if $debug_mode
     end
 
     private

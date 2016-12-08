@@ -11,6 +11,8 @@ class JumpyRuns < Gosu::Window
 
     def initialize(width = 800, height = 600, fullscreen = false)
         super
+        $debug_mode = true
+
         self.caption = 'Jumpy Runs'
         @moving_speed = 7
 

@@ -8,9 +8,12 @@ class ObstacleGraphic < GraphicalComponent
         
         @width = 32
         @height = 16
-        @image = Gosu::Image.load_tiles window, './resources/sheet.png', @width, @height, false
-        
         @size = 2
+
+        @image = Gosu::Image.load_tiles window, './resources/sheet.png', @width, @height, false
+        # Abstract representation of the graphical component
+        @rectangle = Rectangle.new(position, @width*@size, @height*@size)
+
         @start_x = position.x
         @end_x = @start_x + @width * @size
         @start_y = position.y
@@ -21,6 +24,7 @@ class ObstacleGraphic < GraphicalComponent
         frame = 12
         image = @image[frame]
         image.draw @start_x, @start_y, 1, @size, @size
+        @rectangle.draw(@window) if $debug_mode
     end
 
     def in_range?(x)
