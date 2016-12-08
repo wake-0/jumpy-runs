@@ -8,18 +8,16 @@ class Position
         @direction = direction
     end
 
-    def update x, y
-        updateDirection(x, y)        
-        @oldX = @x
-        @oldY = @y
+    def update(x, y)
+        update_direction(x, y)
+        @old_x = @x
+        @old_y = @y
         @x = x
         @y = y
     end
 
-    def updateDirection x, y
-        if (@x == x && @y == y) 
-            return 
-        end
+    def update_direction(x, y)
+        return if @x == x && @y == y
 
         if @x < x
             @direction = :right
@@ -32,11 +30,11 @@ class Position
         end
     end
 
-    def updateDelta xDelta, yDelta = 0
-        self.update @x + xDelta, @y + yDelta
+    def update_delta(x_delta, y_delta = 0)
+        update(@x + x_delta, @y + y_delta)
     end
 
-    def hasChanged
-        @x != @oldX # || @y != @oldY
+    def has_changed_in_x?
+        @x != @old_x
     end
 end

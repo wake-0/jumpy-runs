@@ -12,27 +12,27 @@ class MapGraphic < GraphicalComponent
         @image = Gosu::Image.load_tiles window, './resources/sheet.png', @width, @height, false
         @size = 2
 
-        @xStart = 0
-        @xEnd = window.width
-        @yStart = window.height - (@height*@size)
-        @yEnd = window.height
+        @start_x = 0
+        @end_x = window.width
+        @start_y = window.height - (@height*@size)
+        @end_y = window.height
     end
 
     def draw
-        drawBackgroundColor
-        drawGround
+        draw_background_color
+        draw_ground
     end
 
-    def inRange?(x)
-        x >= @xStart && x <= @xEnd
+    def in_range?(x)
+        x >= @start_x && x <= @end_x
     end
 
-    def getGround(x)
-        @yStart
+    def get_ground(x)
+        @start_y
     end
 
     private
-    def drawBackgroundColor
+    def draw_background_color
         # General background color
         @window.draw_quad(
             0,              0,               @color,
@@ -43,12 +43,12 @@ class MapGraphic < GraphicalComponent
         )
     end
 
-    def drawGround
+    def draw_ground
         parts = 0
         frame = 4
         image = @image[frame]
         while @window.width - parts*(@width*@size) > 0
-            image.draw parts*(@width*@size), @yStart, 1, @size, @size
+            image.draw parts*(@width*@size), @start_y, 1, @size, @size
             parts = parts + 1
         end
     end

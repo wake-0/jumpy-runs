@@ -2,9 +2,7 @@ require './lib/architecture/graphicalComponent'
 require './lib/architecture/position'
 
 class ObstacleGraphic < GraphicalComponent 
-    
-    attr_reader :xStart, :xEnd, :yStart, :yEnd
-    
+
     def initialize(position, window)
         super(position, window)
         
@@ -13,23 +11,23 @@ class ObstacleGraphic < GraphicalComponent
         @image = Gosu::Image.load_tiles window, './resources/sheet.png', @width, @height, false
         
         @size = 2
-        @xStart = position.x
-        @xEnd = @xStart + @width * @size
-        @yStart = position.y
-        @yEnd = @yStart + @height * @size
+        @start_x = position.x
+        @end_x = @start_x + @width * @size
+        @start_y = position.y
+        @end_y = @start_y + @height * @size
     end
 
     def draw
         frame = 12
         image = @image[frame]
-        image.draw @xStart, @yStart, 1, @size, @size
+        image.draw @start_x, @start_y, 1, @size, @size
     end
 
-    def inRange?(x)
-        x <= @xEnd && x >= @xStart
+    def in_range?(x)
+        x <= @end_x && x >= @start_x
     end
 
-    def getGround(x)
-        @yStart
+    def get_ground(x)
+        @start_y
     end
 end

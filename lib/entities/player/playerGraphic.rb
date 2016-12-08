@@ -8,8 +8,8 @@ class PlayerGraphic < GraphicalComponent
         @width = @height = 32
         @image = Gosu::Image.load_tiles @window, './resources/characters.png', @width, @height, false
         @character = character
-        setCharacterOffset
-        @frame = @characterOffset
+        set_character_offset
+        @frame = @character_offset
         @size = 2
     end
 
@@ -21,32 +21,32 @@ class PlayerGraphic < GraphicalComponent
         @width * @size
     end
 
-    def setCharacterOffset
-        # This offset depends on the sprite
-        @characterOffset = 0 if @character == 1
-        @characterOffset = 23 if @character == 2
-        @characterOffset ||= 46
-    end
-
     def draw
-        # Check if the x position has changed then the 
+        # Check if the x position has changed then the
         # image also should change
-        if position.hasChanged
-            @frame = @characterOffset + (@frame + 1) % 18
+        if position.has_changed_in_x?
+            @frame = @character_offset + (@frame + 1) % 18
         end
 
         # Find direction
         if position.direction == :right || position.direction == :left 
-            @positionDirection = position.direction
+            @position_direction = position.direction
         end
         
         # Draw image in left or right direction
         image = @image[@frame]
-        if @positionDirection == :right
+        if @position_direction == :right
             image.draw position.x, position.y, 1, @size, @size
-        elsif @positionDirection == :left
+        elsif @position_direction == :left
             image.draw position.x + width, position.y, 1, -@size, @size
         end
     end
 
+    private
+    def set_character_offset
+        # This offset depends on the sprite
+        @character_offset = 0 if @character == 1
+        @character_offset = 23 if @character == 2
+        @character_offset ||= 46
+    end
 end

@@ -3,35 +3,33 @@ require_relative 'physicalComponent'
 
 class GameObject
     
-    attr_reader :position, :position
-
-    def initialize(position, inputX, inputY, window)
+    def initialize(position, input_x, input_y, window)
         # These are the components of the game object
         # for example the graphic, the logic, the sound
-        @physicalComponents = []
-        @graphicalComponents = []
+        @physical_components = []
+        @graphical_components = []
         @position = position
-        @inputX = inputX
-        @inputY = inputY
+        @input_x = input_x
+        @input_y = input_y
         @window = window
     end
 
     def draw
-        @graphicalComponents.each { |c| c.draw }
+        @graphical_components.each { |c| c.draw }
     end
 
     def update
-        @physicalComponents.each { |c| c.update }
+        @physical_components.each { |c| c.update }
     end
 
-    def addComponent component
-        @graphicalComponents << component if component.class <= GraphicalComponent
-        @physicalComponents << component if component.class  <= PhysicalComponent
+    def add_component(component)
+        @graphical_components << component if component.class <= GraphicalComponent
+        @physical_components << component if component.class <= PhysicalComponent
     end
 
-    def removeComponent component
-        @graphicalComponents.delete(component)
-        @physicalComponents.delete(component)
+    def remove_component(component)
+        @graphical_components.delete(component)
+        @physical_components.delete(component)
     end
 
 end

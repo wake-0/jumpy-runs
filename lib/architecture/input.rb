@@ -1,6 +1,6 @@
 class Input
 
-    attr_accessor :direction, :delta 
+    attr_reader :direction, :delta
 
     def initialize (direction, delta)
         @direction = direction

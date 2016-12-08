@@ -6,12 +6,12 @@ require_relative 'playerPhysic'
 
 class Player < GameObject
 
-    def initialize (position, inputX,inputY, window, character = 1)
-        super(position, inputX,inputY, window)
+    def initialize (position, input_x, input_y, window, character = 1)
+        super(position, input_x, input_y, window)
         
-        playerGraphic = PlayerGraphic.new(position, window, character)
-        playerPhysic = PlayerPhysic.new(position, inputX,inputY, playerGraphic)  
-        addComponent(playerGraphic)
-        addComponent(playerPhysic)
+        player_graphic = PlayerGraphic.new(position, window, character)
+        player_physic = PlayerPhysic.new(position, input_x, input_y, player_graphic)
+        add_component(player_graphic)
+        add_component(player_physic)
     end
 end
