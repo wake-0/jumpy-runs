@@ -4,30 +4,13 @@ require './lib/architecture/rectangle'
 
 class PlayerGraphic < GraphicalComponent
 
-    attr_reader :rectangle
-
     def initialize(position, window, character = 1)
-        super(position, window)
-
-        @width = 32
-        @height = 32
-        @size = 2
-
-        @image = Gosu::Image.load_tiles @window, './resources/characters.png', @width, @height, false
-        # Abstract representation of the graphical component
-        @rectangle = Rectangle.new(position, @width*@size, @height*@size)
+        super(position, window, 32, 32, 2)
+        @image = Gosu::Image.load_tiles @window, './resources/characters.png', width, height, false
         # Character selection
         @character = character
         set_character_offset
         @frame = @character_offset
-    end
-
-    def height
-        @rectangle.height
-    end
-
-    def width
-        @rectangle.width
     end
 
     def draw
@@ -45,12 +28,12 @@ class PlayerGraphic < GraphicalComponent
         # Draw image in left or right direction
         image = @image[@frame]
         if @position_direction == :right
-            image.draw position.x, position.y, 1, @size, @size
+            image.draw rectangle.top_left_x, rectangle.top_left_y, 1, size_factor, size_factor
         elsif @position_direction == :left
-            image.draw position.x + width, position.y, 1, -@size, @size
+            image.draw rectangle.top_left_x + width*size_factor, rectangle.top_left_y, 1, -size_factor, size_factor
         end
 
-        @rectangle.draw(@window) if $debug_mode
+        rectangle.draw(@window) if $debug_mode
     end
 
     private

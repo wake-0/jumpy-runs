@@ -28,6 +28,7 @@ class JumpyRuns < Gosu::Window
 
     def button_down(id)
         close if id == Gosu::KbEscape
+        $debug_mode = !$debug_mode if id == Gosu::KbD
     end
 
     def update

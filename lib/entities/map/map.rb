@@ -2,16 +2,17 @@ require './lib/architecture/gameObject'
 require './lib/architecture/position'
 require './lib/architecture/input'
 require './lib/entities/obstacle/obstacleGraphic'
-require_relative 'mapGraphic'
+require_relative 'mapBackgroundGraphic'
 
 class Map < GameObject
 
     def initialize (position, input_x, input_y, window)
         super(position, input_x, input_y, window)
 
-        @map_graphic = MapGraphic.new(position, window)
+        @map_graphic = MapBackgroundGraphic.new(position, window)
         add_component(@map_graphic)
-        
+
+        # Create a general map
         @obstacle_position = Position.new(100, 450)
         @obstacle_graphic = ObstacleGraphic.new(@obstacle_position, window)
         add_component(@obstacle_graphic)
@@ -39,7 +40,6 @@ class Map < GameObject
         @obstacle_position7 = Position.new(556, 250)
         @obstacle_graphic7 = ObstacleGraphic.new(@obstacle_position7, window)
         add_component(@obstacle_graphic7)
-
     end
 
     def get_ground(rectangle)

@@ -39,7 +39,7 @@ class PlayerPhysic < PhysicalComponent
     private
     def distance_to_ground
         ground_y = $map.get_ground(@graphical_component.rectangle)
-        player_y = @position.y + @graphical_component.height
+        player_y = @position.y + @graphical_component.rectangle.height
         ground_y - player_y
     end
 
