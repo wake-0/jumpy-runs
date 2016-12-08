@@ -34,6 +34,13 @@ class Rectangle
     x_min < x_max && y_min < y_max
   end
 
+  def intersect_x?(rectangle)
+    x_min = [top_left_x, rectangle.top_left_x].max
+    x_max = [bottom_right_x, rectangle.bottom_right_x].min
+
+    x_min < x_max
+  end
+
   # This method is used for test purposes
   def draw(window)
     window.draw_quad(top_left_x, top_left_y, 0x33ffffff,

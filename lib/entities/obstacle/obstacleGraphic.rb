@@ -27,11 +27,11 @@ class ObstacleGraphic < GraphicalComponent
         @rectangle.draw(@window) if $debug_mode
     end
 
-    def in_range?(x)
-        x <= @end_x && x >= @start_x
+    def in_range?(rectangle)
+        @rectangle.intersect_x?(rectangle)
     end
 
-    def get_ground(x)
-        @start_y
+    def get_ground(rectangle)
+        @rectangle.top_left_y
     end
 end

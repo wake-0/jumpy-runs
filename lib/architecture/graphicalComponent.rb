@@ -10,9 +10,9 @@ class GraphicalComponent < Component
     def draw
     end
 
-    def in_range?(x)
+    def in_range?(rectangle)
     end
 
-    def get_ground(x)
+    def get_ground(rectangle)
     end
 end

@@ -42,18 +42,18 @@ class Map < GameObject
 
     end
 
-    def get_ground(x, y)
+    def get_ground(rectangle)
         min_index = 0
         (1...@graphical_components.length).each { |i|
             gc = @graphical_components[i]
-            if gc.in_range?(x)
-                min_value = @graphical_components[min_index].get_ground(x)
-                difference = gc.get_ground(x) - y
+            if gc.in_range?(rectangle)
+                min_value = @graphical_components[min_index].get_ground(rectangle)
+                difference = gc.get_ground(rectangle) - rectangle.top_left_y
                 min_index = i if difference >= 0 && difference < min_value
             end
         }
         
-        @graphical_components[min_index].get_ground(x)
+        @graphical_components[min_index].get_ground(rectangle)
     end
 
 end

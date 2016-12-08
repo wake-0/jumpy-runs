@@ -4,6 +4,8 @@ require './lib/architecture/rectangle'
 
 class PlayerGraphic < GraphicalComponent
 
+    attr_reader :rectangle
+
     def initialize(position, window, character = 1)
         super(position, window)
 

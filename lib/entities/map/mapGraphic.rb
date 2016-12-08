@@ -23,11 +23,11 @@ class MapGraphic < GraphicalComponent
         draw_ground
     end
 
-    def in_range?(x)
-        x >= @start_x && x <= @end_x
+    def in_range?(rectangle)
+        true
     end
 
-    def get_ground(x)
+    def get_ground(rectangle)
         @start_y
     end
 
