@@ -26,9 +26,7 @@ class PlayerPhysic < PhysicalComponent
         end
         
         if @input_y.direction == :top
-            if !@is_jumping
-                @jump_start = @position.y + @graphical_component.rectangle.height
-            end
+            @jump_start = @position.y + @graphical_component.rectangle.height unless @is_jumping
             @is_jumping = true
             delta_y = -@input_y.delta * @jump_speed unless @highest_point_reached
         else
@@ -57,9 +55,8 @@ class PlayerPhysic < PhysicalComponent
         # This is used to check if the highest point while jumping was reached
         @highest_point_reached = false if distance_to_ground == 0
         @highest_point_reached = true if !@is_jumping || (@jump_start - (@position.y + @graphical_component.rectangle.height)) >= @jump_height
-        if @highest_point_reached
-            @is_jumping = false
-        end
+        @is_jumping = false if @highest_point_reached
+
         gravity_delta
     end
 

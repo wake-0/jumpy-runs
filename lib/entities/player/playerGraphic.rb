@@ -6,7 +6,7 @@ class PlayerGraphic < GraphicalComponent
 
     def initialize(position, window, character = 1)
         super(position, window, 32, 32, 2)
-        @image = Gosu::Image.load_tiles @window, './resources/characters.png', width, height, false
+        @image = Gosu::Image.load_tiles(@window, './resources/characters.png', width, height, false)
         # Character selection
         @character = character
         set_character_offset
