@@ -4,11 +4,11 @@ require './lib/architecture/rectangle'
 
 class PlayerGraphic < GraphicalComponent
 
-    def initialize(position, window, character = 1)
+    def initialize(position, window, player_setting)
         super(position, window, 32, 32, 2)
         @image = Gosu::Image.load_tiles(@window, './resources/characters.png', unsized_width, unsized_height, false)
         # Character selection
-        @character = character
+        @player_setting = player_setting
         set_character_offset
         @frame = @character_offset
     end
@@ -39,8 +39,8 @@ class PlayerGraphic < GraphicalComponent
     private
     def set_character_offset
         # This offset depends on the sprite
-        @character_offset = 0 if @character == 1
-        @character_offset = 23 if @character == 2
+        @character_offset = 0 if @player_setting.character == 1
+        @character_offset = 23 if @player_setting.character == 2
         @character_offset ||= 46
     end
 end
