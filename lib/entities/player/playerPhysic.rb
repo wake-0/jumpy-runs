@@ -4,8 +4,9 @@ require './lib/architecture/input'
 
 class PlayerPhysic < PhysicalComponent
     
-    def initialize(position, input_x, input_y, player_graphic)
+    def initialize(position, input_x, input_y, player_graphic, map)
         super(position, input_x, input_y, player_graphic)
+        @map = map
         @gravity = 8
         @jump_height = 150
         @jump_speed = 3
@@ -26,7 +27,7 @@ class PlayerPhysic < PhysicalComponent
         end
         
         if @input_y.direction == :top
-            @jump_start = @position.y + @graphical_component.rectangle.height unless @is_jumping
+            @jump_start_position = @position.y + @graphical_component.height unless @is_jumping
             @is_jumping = true
             delta_y = -@input_y.delta * @jump_speed unless @highest_point_reached
         else
@@ -42,8 +43,8 @@ class PlayerPhysic < PhysicalComponent
     
     private
     def distance_to_ground
-        ground_y = $map.get_ground(@graphical_component.rectangle)
-        player_y = @position.y + @graphical_component.rectangle.height
+        ground_y = @map.get_ground(@graphical_component.rectangle)
+        player_y = @position.y + @graphical_component.height
         ground_y - player_y
     end
     
@@ -54,10 +55,14 @@ class PlayerPhysic < PhysicalComponent
         
         # This is used to check if the highest point while jumping was reached
         @highest_point_reached = false if distance_to_ground == 0
-        @highest_point_reached = true if !@is_jumping || (@jump_start - (@position.y + @graphical_component.rectangle.height)) >= @jump_height
+        @highest_point_reached = true if !@is_jumping || jump_height_reached?
         @is_jumping = false if @highest_point_reached
 
         gravity_delta
     end
 
+    def jump_height_reached?
+        jump_position = @position.y + @graphical_component.height
+        (@jump_start_position - jump_position) >= @jump_height
+    end
 end

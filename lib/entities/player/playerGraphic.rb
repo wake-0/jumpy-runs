@@ -6,7 +6,7 @@ class PlayerGraphic < GraphicalComponent
 
     def initialize(position, window, character = 1)
         super(position, window, 32, 32, 2)
-        @image = Gosu::Image.load_tiles(@window, './resources/characters.png', width, height, false)
+        @image = Gosu::Image.load_tiles(@window, './resources/characters.png', unsized_width, unsized_height, false)
         # Character selection
         @character = character
         set_character_offset
@@ -30,7 +30,7 @@ class PlayerGraphic < GraphicalComponent
         if @position_direction == :right
             image.draw rectangle.top_left_x, rectangle.top_left_y, 1, size_factor, size_factor
         elsif @position_direction == :left
-            image.draw rectangle.top_left_x + width*size_factor, rectangle.top_left_y, 1, -size_factor, size_factor
+            image.draw rectangle.top_left_x + width, rectangle.top_left_y, 1, -size_factor, size_factor
         end
 
         rectangle.draw(@window) if $debug_mode

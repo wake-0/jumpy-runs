@@ -20,10 +20,10 @@ class JumpyRuns < Gosu::Window
         @input_y = Input.new(:none, 0)
 
         @map_position = Position.new(0, 0, :none)
-        $map = Map.new(@map_position, @input_x, @input_y, self)
+        @map = Map.new(@map_position, @input_x, @input_y, self)
 
         @player_position = Position.new(30 - 16, self.height - 96, :right)
-        @player = Player.new(@player_position, @input_x, @input_y, self, 1)
+        @player = Player.new(@player_position, @input_x, @input_y, self, @map, 1)
     end
 
     def button_down(id)
@@ -52,7 +52,7 @@ class JumpyRuns < Gosu::Window
     end
 
     def draw
-        $map.draw
+        @map.draw
         @player.draw
     end
 end

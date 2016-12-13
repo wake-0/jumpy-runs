@@ -5,7 +5,7 @@ class ObstacleGraphic < GraphicalComponent
 
     def initialize(position, window)
         super(position, window, 32, 16, 2)
-        @image = Gosu::Image.load_tiles window, './resources/sheet.png', width, height, false
+        @image = Gosu::Image.load_tiles window, './resources/sheet.png', unsized_width, unsized_height, false
     end
 
     def draw
