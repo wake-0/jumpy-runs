@@ -2,7 +2,9 @@ require_relative 'graphicalComponent'
 require_relative 'physicalComponent'
 
 class GameObject
-    
+
+    attr_reader :window
+
     def initialize(position, input_x, input_y, window)
         # These are the components of the game object
         # for example the graphic, the logic, the sound

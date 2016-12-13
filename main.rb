@@ -22,7 +22,9 @@ class JumpyRuns < Gosu::Window
         @map_position = Position.new(0, 0, :none)
         @map = Map.new(@map_position, @input_x, @input_y, self)
 
-        @player_position = Position.new(30 - 16, self.height - 96, :right)
+        #@player_position = Position.new(30 - 16, self.height - 96, :right)
+        @player_position = @map.get_start_position
+        @player_position.update_delta(16, -96);
         @player = Player.new(@player_position, @input_x, @input_y, self, @map, 1)
     end
 

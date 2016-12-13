@@ -56,4 +56,8 @@ class Map < GameObject
         @graphical_components[min_index].get_ground(rectangle)
     end
 
+    def get_start_position
+        Position.new(0, window.height, :right)
+    end
+
 end
