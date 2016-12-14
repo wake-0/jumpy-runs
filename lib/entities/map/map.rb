@@ -13,33 +13,7 @@ class Map < GameObject
         add_component(@map_graphic)
 
         # Create a general map
-        @obstacle_position = Position.new(100, 450)
-        @obstacle_graphic = ObstacleGraphic.new(@obstacle_position, window)
-        add_component(@obstacle_graphic)
-
-        @obstacle_position2 = Position.new(200, 350)
-        @obstacle_graphic2 = ObstacleGraphic.new(@obstacle_position2, window)
-        add_component(@obstacle_graphic2)
-
-        @obstacle_position3 = Position.new(300, 250)
-        @obstacle_graphic3 = ObstacleGraphic.new(@obstacle_position3, window)
-        add_component(@obstacle_graphic3)
-        
-        @obstacle_position4 = Position.new(364, 250)
-        @obstacle_graphic4 = ObstacleGraphic.new(@obstacle_position4, window)
-        add_component(@obstacle_graphic4)
-
-        @obstacle_position5 = Position.new(428, 250)
-        @obstacle_graphic5 = ObstacleGraphic.new(@obstacle_position5, window)
-        add_component(@obstacle_graphic5)
-
-        @obstacle_position6 = Position.new(492, 250)
-        @obstacle_graphic6 = ObstacleGraphic.new(@obstacle_position6, window)
-        add_component(@obstacle_graphic6)
-
-        @obstacle_position7 = Position.new(556, 250)
-        @obstacle_graphic7 = ObstacleGraphic.new(@obstacle_position7, window)
-        add_component(@obstacle_graphic7)
+        create_obstacles(window)
     end
 
     def get_ground(rectangle)
@@ -58,6 +32,45 @@ class Map < GameObject
 
     def get_start_position
         Position.new(0, window.height, :right)
+    end
+
+    private
+    def create_obstacles(window)
+        @obstacle_position = Position.new(100, 450)
+        @obstacle_graphic = ObstacleGraphic.new(@obstacle_position, window)
+        add_component(@obstacle_graphic)
+
+        @obstacle_position2 = Position.new(200, 350)
+        @obstacle_graphic2 = ObstacleGraphic.new(@obstacle_position2, window)
+        add_component(@obstacle_graphic2)
+
+        @obstacle_position3 = Position.new(300, 250)
+        @obstacle_graphic3 = ObstacleGraphic.new(@obstacle_position3, window)
+        add_component(@obstacle_graphic3)
+
+        @obstacle_position4 = Position.new(364, 250)
+        @obstacle_graphic4 = ObstacleGraphic.new(@obstacle_position4, window)
+        add_component(@obstacle_graphic4)
+
+        @obstacle_position5 = Position.new(428, 250)
+        @obstacle_graphic5 = ObstacleGraphic.new(@obstacle_position5, window)
+        add_component(@obstacle_graphic5)
+
+        @obstacle_position6 = Position.new(492, 250)
+        @obstacle_graphic6 = ObstacleGraphic.new(@obstacle_position6, window)
+        add_component(@obstacle_graphic6)
+
+        @obstacle_position7 = Position.new(556, 250)
+        @obstacle_graphic7 = ObstacleGraphic.new(@obstacle_position7, window)
+        add_component(@obstacle_graphic7)
+
+        @obstacle_position8 = Position.new(300, 130)
+        @obstacle_graphic8 = ObstacleGraphic.new(@obstacle_position8, window)
+        add_component(@obstacle_graphic8)
+
+        @obstacle_position9 = Position.new(200, 50)
+        @obstacle_graphic9 = ObstacleGraphic.new(@obstacle_position9, window)
+        add_component(@obstacle_graphic9)
     end
 
 end
