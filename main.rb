@@ -7,6 +7,7 @@ require './lib/entities/map/map'
 require './lib/entities/statistic/statistic'
 require './lib/architecture/position'
 require './lib/architecture/input'
+require './lib/architecture/camera'
 
 class JumpyRuns < Gosu::Window
 
@@ -19,17 +20,21 @@ class JumpyRuns < Gosu::Window
 
         @input_x = Input.new(:none, 0)
         @input_y = Input.new(:none, 0)
+        @view_position = Position.new(0, 0, :none)
 
         @map_position = Position.new(0, 0, :none)
-        @map = Map.new(@map_position, @input_x, @input_y, self)
+        @map_camera = Camera.new(@map_position, @view_position)
+        @map = Map.new(@map_camera, @input_x, @input_y, self)
 
         @statistic_position = Position .new(0, 0, :none)
-        @statistic = Statistic.new(@statistic_position, @input_x, @input_y, self)
+        @statistic_camera = Camera.new(@statistic_position, @view_position)
+        @statistic = Statistic.new(@statistic_camera, @input_x, @input_y, self)
 
         #@player_position = Position.new(30 - 16, self.height - 96, :right)
         @player_position = @map.get_start_position
-        @player_position.update_delta(16, -96);
-        @player = Player.new(@player_position, @input_x, @input_y, self, @map, 1)
+        @player_position.update_delta(16, -96)
+        @player_camera = Camera.new(@player_position, @view_position, 1)
+        @player = Player.new(@player_camera, @input_x, @input_y, self, @map, 1)
     end
 
     def button_down(id)

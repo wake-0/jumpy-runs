@@ -3,13 +3,15 @@ require './lib/architecture/position'
 require './lib/architecture/input'
 require './lib/entities/obstacle/obstacleGraphic'
 require_relative 'mapBackgroundGraphic'
+require_relative 'mapSettings'
 
 class Map < GameObject
 
-    def initialize (position, input_x, input_y, window)
-        super(position, input_x, input_y, window)
+    def initialize (camera, input_x, input_y, window)
+        super(camera, input_x, input_y, window)
 
-        @map_graphic = MapBackgroundGraphic.new(position, window)
+        @map_settings = MapSettings.new(window.width, window.height)
+        @map_graphic = MapBackgroundGraphic.new(camera, window, @map_settings)
         add_component(@map_graphic)
 
         # Create a general map
@@ -31,45 +33,54 @@ class Map < GameObject
     end
 
     def get_start_position
-        Position.new(0, window.height, :right)
+        Position.new(0, 0, :right)
     end
 
     private
     def create_obstacles(window)
-        @obstacle_position = Position.new(100, 450)
-        @obstacle_graphic = ObstacleGraphic.new(@obstacle_position, window)
-        add_component(@obstacle_graphic)
+        @obstacle_position1 = Position.new(100, 450)
+        @obstacle_camera1 = Camera.new(@obstacle_position1, @camera.view_position, @camera.zoom_factor)
+        @obstacle_graphic1 = ObstacleGraphic.new(@obstacle_camera1, window)
+        add_component(@obstacle_graphic1)
 
         @obstacle_position2 = Position.new(200, 350)
-        @obstacle_graphic2 = ObstacleGraphic.new(@obstacle_position2, window)
+        @obstacle_camera2 = Camera.new(@obstacle_position2, @camera.view_position, @camera.zoom_factor)
+        @obstacle_graphic2 = ObstacleGraphic.new(@obstacle_camera2, window)
         add_component(@obstacle_graphic2)
 
         @obstacle_position3 = Position.new(300, 250)
-        @obstacle_graphic3 = ObstacleGraphic.new(@obstacle_position3, window)
+        @obstacle_camera3 = Camera.new(@obstacle_position3, @camera.view_position, @camera.zoom_factor)
+        @obstacle_graphic3 = ObstacleGraphic.new(@obstacle_camera3, window)
         add_component(@obstacle_graphic3)
 
         @obstacle_position4 = Position.new(364, 250)
-        @obstacle_graphic4 = ObstacleGraphic.new(@obstacle_position4, window)
+        @obstacle_camera4 = Camera.new(@obstacle_position4, @camera.view_position, @camera.zoom_factor)
+        @obstacle_graphic4 = ObstacleGraphic.new(@obstacle_camera4, window)
         add_component(@obstacle_graphic4)
 
         @obstacle_position5 = Position.new(428, 250)
-        @obstacle_graphic5 = ObstacleGraphic.new(@obstacle_position5, window)
+        @obstacle_camera5 = Camera.new(@obstacle_position5, @camera.view_position, @camera.zoom_factor)
+        @obstacle_graphic5 = ObstacleGraphic.new(@obstacle_camera5, window)
         add_component(@obstacle_graphic5)
 
         @obstacle_position6 = Position.new(492, 250)
-        @obstacle_graphic6 = ObstacleGraphic.new(@obstacle_position6, window)
+        @obstacle_camera6 = Camera.new(@obstacle_position6, @camera.view_position, @camera.zoom_factor)
+        @obstacle_graphic6 = ObstacleGraphic.new(@obstacle_camera6, window)
         add_component(@obstacle_graphic6)
 
         @obstacle_position7 = Position.new(556, 250)
-        @obstacle_graphic7 = ObstacleGraphic.new(@obstacle_position7, window)
+        @obstacle_camera7 = Camera.new(@obstacle_position7, @camera.view_position, @camera.zoom_factor)
+        @obstacle_graphic7 = ObstacleGraphic.new(@obstacle_camera7, window)
         add_component(@obstacle_graphic7)
 
         @obstacle_position8 = Position.new(300, 130)
-        @obstacle_graphic8 = ObstacleGraphic.new(@obstacle_position8, window)
+        @obstacle_camera8 = Camera.new(@obstacle_position8, @camera.view_position, @camera.zoom_factor)
+        @obstacle_graphic8 = ObstacleGraphic.new(@obstacle_camera8, window)
         add_component(@obstacle_graphic8)
 
         @obstacle_position9 = Position.new(200, 50)
-        @obstacle_graphic9 = ObstacleGraphic.new(@obstacle_position9, window)
+        @obstacle_camera9 = Camera.new(@obstacle_position9, @camera.view_position, @camera.zoom_factor)
+        @obstacle_graphic9 = ObstacleGraphic.new(@obstacle_camera9, window)
         add_component(@obstacle_graphic9)
     end
 

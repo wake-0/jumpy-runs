@@ -2,8 +2,8 @@ require_relative 'component'
 
 class PhysicalComponent < Component
 
-    def initialize(position, input_x, input_y, graphical_component)
-        super(position)
+    def initialize(camera, input_x, input_y, graphical_component)
+        super(camera)
         @input_x = input_x
         @input_y = input_y
         @graphical_component = graphical_component

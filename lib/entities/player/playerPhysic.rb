@@ -4,8 +4,8 @@ require './lib/architecture/input'
 
 class PlayerPhysic < PhysicalComponent
     
-    def initialize(position, input_x, input_y, player_graphic, player_setting, map)
-        super(position, input_x, input_y, player_graphic)
+    def initialize(camera, input_x, input_y, player_graphic, player_setting, map)
+        super(camera, input_x, input_y, player_graphic)
         @map = map
         @player_setting = player_setting
         @is_jumping = false
@@ -13,6 +13,7 @@ class PlayerPhysic < PhysicalComponent
     end
     
     def update
+        position = camera.map_position
         delta_x = 0
         delta_y = 0
         
@@ -25,7 +26,7 @@ class PlayerPhysic < PhysicalComponent
         end
         
         if @input_y.direction == :top
-            @jump_start_position = @position.y + @graphical_component.height unless @is_jumping
+            @jump_start_position = position.y + @graphical_component.resized_height unless @is_jumping
             @is_jumping = true
             delta_y = -@input_y.delta * @player_setting.jump_speed unless @highest_point_reached
         else
@@ -36,13 +37,13 @@ class PlayerPhysic < PhysicalComponent
         # @position.updateDelta(0, @input.delta) if @input.direction == :down
         
         delta_y = delta_y + gravity_delta
-        @position.update_delta(delta_x, delta_y)
+        position.update_delta(delta_x, delta_y)
     end
     
     private
     def distance_to_ground
         ground_y = @map.get_ground(@graphical_component.rectangle)
-        player_y = @position.y + @graphical_component.height
+        player_y = camera.map_position.y + @graphical_component.resized_height
         ground_y - player_y
     end
     
@@ -60,7 +61,7 @@ class PlayerPhysic < PhysicalComponent
     end
 
     def jump_height_reached?
-        jump_position = @position.y + @graphical_component.height
+        jump_position = camera.map_position.y + @graphical_component.resized_height
         (@jump_start_position - jump_position) >= @player_setting.jump_height
     end
 end

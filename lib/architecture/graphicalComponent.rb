@@ -3,17 +3,22 @@ require_relative 'rectangle'
 
 class GraphicalComponent < Component
 
-    attr_reader  :width, :height, :unsized_width, :unsized_height, :size_factor, :rectangle
+    attr_reader  :width, :height, :rectangle
 
-    def initialize(position, window, width, height, size_factor = 1)
-        super(position)
+    def initialize(camera, window, width, height)
+        super(camera)
         @window = window
-        @width = width * size_factor
-        @height = height * size_factor
-        @unsized_width = width
-        @unsized_height = height
-        @size_factor = size_factor
-        @rectangle = Rectangle.new(position, @width, @height)
+        @width = width
+        @height = height
+        @rectangle = Rectangle.new(camera.map_position, resized_width, resized_height)
+    end
+
+    def resized_width
+        width * camera.zoom_factor
+    end
+
+    def resized_height
+        height * camera.zoom_factor
     end
 
     def draw
