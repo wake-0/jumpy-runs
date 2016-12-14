@@ -4,6 +4,7 @@ require 'gosu'
 # For import the file name is used instead of the class name
 require './lib/entities/player/player'
 require './lib/entities/map/map'
+require './lib/entities/statistic/statistic'
 require './lib/architecture/position'
 require './lib/architecture/input'
 
@@ -21,6 +22,9 @@ class JumpyRuns < Gosu::Window
 
         @map_position = Position.new(0, 0, :none)
         @map = Map.new(@map_position, @input_x, @input_y, self)
+
+        @statistic_position = Position .new(0, 0, :none)
+        @statistic = Statistic.new(@statistic_position, @input_x, @input_y, self)
 
         #@player_position = Position.new(30 - 16, self.height - 96, :right)
         @player_position = @map.get_start_position
@@ -55,6 +59,7 @@ class JumpyRuns < Gosu::Window
 
     def draw
         @map.draw
+        @statistic.draw
         @player.draw
     end
 end
