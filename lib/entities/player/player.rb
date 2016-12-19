@@ -11,9 +11,13 @@ class Player < GameObject
         super(camera, input_x, input_y, window)
 
         player_setting = PlayerSettings.new(2, 8, 150, 3)
-        player_graphic = PlayerGraphic.new(camera, window, player_setting)
-        player_physic = PlayerPhysic.new(camera, input_x, input_y, player_graphic, player_setting, map)
-        add_component(player_graphic)
+        @player_graphic = PlayerGraphic.new(camera, window, player_setting)
+        player_physic = PlayerPhysic.new(camera, input_x, input_y, @player_graphic, player_setting, map)
+        add_component(@player_graphic)
         add_component(player_physic)
+    end
+
+    def rectangle
+        @player_graphic.rectangle
     end
 end

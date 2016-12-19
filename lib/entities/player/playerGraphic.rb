@@ -15,6 +15,7 @@ class PlayerGraphic < GraphicalComponent
 
     def draw
       position = camera.map_position
+
       # Check if the x position has changed then the
       # image also should change
       if position.has_changed_in_x?
@@ -29,9 +30,9 @@ class PlayerGraphic < GraphicalComponent
       # Draw image in left or right direction
       image = @image[@frame]
       if @position_direction == :right
-          image.draw rectangle.top_left_x, rectangle.top_left_y, 1, camera.zoom_factor, camera.zoom_factor
+          image.draw(rectangle.top_left_x_view, rectangle.top_left_y_view, 1, camera.zoom_factor, camera.zoom_factor)
       elsif @position_direction == :left
-          image.draw rectangle.top_left_x + resized_width, rectangle.top_left_y, 1, -camera.zoom_factor, camera.zoom_factor
+          image.draw(rectangle.top_left_x_view + resized_width, rectangle.top_left_y_view, 1, -camera.zoom_factor, camera.zoom_factor)
       end
 
       rectangle.draw(@window) if $debug_mode

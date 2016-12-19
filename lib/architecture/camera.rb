@@ -1,3 +1,5 @@
+require_relative 'rectangle'
+
 class Camera
 
   attr_reader :map_position, :view_position, :zoom_factor
@@ -7,5 +9,6 @@ class Camera
     @view_position = view_position
     @zoom_factor = zoom_factor
   end
+
 
 end

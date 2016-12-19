@@ -11,7 +11,7 @@ class ObstacleGraphic < GraphicalComponent
     def draw
         frame = 12
         image = @image[frame]
-        image.draw rectangle.top_left_x, rectangle.top_left_y, 1, camera.zoom_factor, camera.zoom_factor
+        image.draw rectangle.top_left_x_view, rectangle.top_left_y_view, 1, camera.zoom_factor, camera.zoom_factor
         rectangle.draw(@window) if $debug_mode
     end
 

@@ -1,27 +1,43 @@
 class Rectangle
 
-  attr_reader :top_left_position, :width, :height
+  attr_reader :camera, :width, :height
 
-  def initialize(top_left_position, width, height)
-    @top_left_position = top_left_position
+  def initialize(camera, width, height)
+    @camera = camera
     @width = width
     @height = height
   end
 
   def top_left_x
-    @top_left_position.x
+    camera.map_position.x
   end
 
   def top_left_y
-    @top_left_position.y
+    camera.map_position.y
   end
 
   def bottom_right_x
-    @top_left_position.x + @width
+    top_left_x + @width
   end
 
   def bottom_right_y
-    @top_left_position.y + @height
+    top_left_y + @height
+  end
+
+  def top_left_x_view
+    top_left_x + camera.view_position.x
+  end
+
+  def top_left_y_view
+    top_left_y + camera.view_position.y
+  end
+
+  def bottom_right_x_view
+    bottom_right_x + camera.view_position.x
+  end
+
+  def bottom_right_y_view
+    bottom_right_y + camera.view_position.y
   end
 
   def intersect?(rectangle)
@@ -34,6 +50,16 @@ class Rectangle
     x_min < x_max && y_min < y_max
   end
 
+  def intersect_view?(rectangle)
+    x_min = [top_left_x_view, rectangle.top_left_x].max
+    y_min = [top_left_y_view, rectangle.top_left_y].max
+
+    x_max = [bottom_right_x_view, rectangle.bottom_right_x].min
+    y_max = [bottom_right_y_view, rectangle.bottom_right_y].min
+
+    x_min < x_max && y_min < y_max
+  end
+
   def intersect_x?(rectangle)
     x_min = [top_left_x, rectangle.top_left_x].max
     x_max = [bottom_right_x, rectangle.bottom_right_x].min
@@ -41,12 +67,19 @@ class Rectangle
     x_min < x_max
   end
 
+  def intersect_y?(rectangle)
+    y_min = [top_left_y_view, rectangle.top_left_y].max
+    y_max = [bottom_right_y_view, rectangle.bottom_right_y].min
+
+    y_min < y_max
+  end
+
   # This method is used for test purposes
   def draw(window)
-    window.draw_quad(top_left_x, top_left_y, 0x33ffffff,
-                      bottom_right_x, top_left_y, 0x33ffffff,
-                      bottom_right_x, bottom_right_y, 0x33ffffff,
-                      top_left_x, bottom_right_y, 0x33ffffff, 100)
+    window.draw_quad(top_left_x_view, top_left_y_view, 0x33ffffff,
+                      bottom_right_x_view, top_left_y_view, 0x33ffffff,
+                      bottom_right_x_view, bottom_right_y_view, 0x33ffffff,
+                      top_left_x_view, bottom_right_y_view, 0x33ffffff, 100)
   end
 
 end

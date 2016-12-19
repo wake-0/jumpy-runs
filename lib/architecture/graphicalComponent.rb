@@ -10,7 +10,7 @@ class GraphicalComponent < Component
         @window = window
         @width = width
         @height = height
-        @rectangle = Rectangle.new(camera.map_position, resized_width, resized_height)
+        @rectangle = Rectangle.new(camera, resized_width, resized_height)
     end
 
     def resized_width

@@ -10,7 +10,7 @@ class StatisticGraphic < GraphicalComponent
   end
 
   def draw
-    @font.draw('Play time:' + play_time, rectangle.top_left_x, rectangle.top_left_y, 1, camera.zoom_factor, camera.zoom_factor)
+    @font.draw('Play time:' + play_time, rectangle.top_left_x_view, rectangle.top_left_y_view, 1, camera.zoom_factor, camera.zoom_factor)
 
     rectangle.draw(@window) if $debug_mode
   end

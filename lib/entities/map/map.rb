@@ -33,7 +33,7 @@ class Map < GameObject
     end
 
     def get_start_position
-        Position.new(0, 0, :right)
+        Position.new(300, 300, :right)
     end
 
     private

@@ -5,6 +5,7 @@ require 'gosu'
 require './lib/entities/player/player'
 require './lib/entities/map/map'
 require './lib/entities/statistic/statistic'
+require './lib/entities/camera/cameraCenter'
 require './lib/architecture/position'
 require './lib/architecture/input'
 require './lib/architecture/camera'
@@ -16,7 +17,7 @@ class JumpyRuns < Gosu::Window
         $debug_mode = true
 
         self.caption = 'Jumpy Runs'
-        @moving_speed = 7
+        @moving_speed = 2
 
         @input_x = Input.new(:none, 0)
         @input_y = Input.new(:none, 0)
@@ -26,7 +27,7 @@ class JumpyRuns < Gosu::Window
         @map_camera = Camera.new(@map_position, @view_position)
         @map = Map.new(@map_camera, @input_x, @input_y, self)
 
-        @statistic_position = Position .new(0, 0, :none)
+        @statistic_position = Position.new(0, 0, :none)
         @statistic_camera = Camera.new(@statistic_position, @view_position)
         @statistic = Statistic.new(@statistic_camera, @input_x, @input_y, self)
 
@@ -35,6 +36,10 @@ class JumpyRuns < Gosu::Window
         @player_position.update_delta(16, -96)
         @player_camera = Camera.new(@player_position, @view_position, 1)
         @player = Player.new(@player_camera, @input_x, @input_y, self, @map, 1)
+
+        @camera_center_position = Position.new(self.width/2, self.height/2, :none)
+        @camera_center_camera = Camera.new(@camera_center_position, @view_position, 1)
+        @camera_center = CameraCenter.new(@camera_center_camera, self)
     end
 
     def button_down(id)
@@ -60,12 +65,14 @@ class JumpyRuns < Gosu::Window
         end
 
         @player.update
+        @camera_center.update(@player.rectangle)
     end
 
     def draw
         @map.draw
         @statistic.draw
         @player.draw
+        @camera_center.draw
     end
 end
 
