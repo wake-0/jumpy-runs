@@ -4,8 +4,8 @@ require './lib/architecture/rectangle'
 
 class PlayerGraphic < GraphicalComponent
 
-        def initialize(camera, window, player_setting)
-        super(camera, window, 32, 32)
+        def initialize(view, window, player_setting)
+        super(view, window, 32, 32)
         @image = Gosu::Image.load_tiles(@window, './resources/characters.png', width, height, false)
         # Character selection
         @player_setting = player_setting
@@ -14,7 +14,7 @@ class PlayerGraphic < GraphicalComponent
     end
 
     def draw
-      position = camera.map_position
+      position = view.map_position
 
       # Check if the x position has changed then the
       # image also should change
@@ -30,9 +30,9 @@ class PlayerGraphic < GraphicalComponent
       # Draw image in left or right direction
       image = @image[@frame]
       if @position_direction == :right
-          image.draw(rectangle.top_left_x_view, rectangle.top_left_y_view, 1, camera.zoom_factor, camera.zoom_factor)
+          image.draw(rectangle.top_left_x_view, rectangle.top_left_y_view, 1, view.zoom_factor, view.zoom_factor)
       elsif @position_direction == :left
-          image.draw(rectangle.top_left_x_view + resized_width, rectangle.top_left_y_view, 1, -camera.zoom_factor, camera.zoom_factor)
+          image.draw(rectangle.top_left_x_view + resized_width, rectangle.top_left_y_view, 1, -view.zoom_factor, view.zoom_factor)
       end
 
       rectangle.draw(@window) if $debug_mode

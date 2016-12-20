@@ -3,8 +3,8 @@ require './lib/architecture/position'
 
 class MapBackgroundGraphic < GraphicalComponent
 
-    def initialize(camera, window, map_settings)
-        super(camera, window, map_settings.width, map_settings.height)
+    def initialize(view, window, map_settings)
+        super(view, window, map_settings.width, map_settings.height)
         @color ||= Gosu::Color.new(0xaaaaccaa)
         @color2 ||= Gosu::Color.new(0xaa123452)
     end

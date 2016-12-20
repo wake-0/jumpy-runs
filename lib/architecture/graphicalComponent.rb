@@ -5,20 +5,20 @@ class GraphicalComponent < Component
 
     attr_reader  :width, :height, :rectangle
 
-    def initialize(camera, window, width, height)
-        super(camera)
+    def initialize(view, window, width, height)
+        super(view)
         @window = window
         @width = width
         @height = height
-        @rectangle = Rectangle.new(camera, resized_width, resized_height)
+        @rectangle = Rectangle.new(view, resized_width, resized_height)
     end
 
     def resized_width
-        width * camera.zoom_factor
+        width * view.zoom_factor
     end
 
     def resized_height
-        height * camera.zoom_factor
+        height * view.zoom_factor
     end
 
     def draw

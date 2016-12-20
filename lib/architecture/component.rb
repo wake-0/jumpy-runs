@@ -1,7 +1,7 @@
 class Component
-    attr_reader :camera
+    attr_reader :view
 
-    def initialize(camera)
-        @camera = camera
+    def initialize(view)
+        @view = view
     end
 end

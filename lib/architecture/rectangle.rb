@@ -1,19 +1,19 @@
 class Rectangle
 
-  attr_reader :camera, :width, :height
+  attr_reader :view, :width, :height
 
-  def initialize(camera, width, height)
-    @camera = camera
+  def initialize(view, width, height)
+    @view = view
     @width = width
     @height = height
   end
 
   def top_left_x
-    camera.map_position.x
+    view.map_position.x
   end
 
   def top_left_y
-    camera.map_position.y
+    view.map_position.y
   end
 
   def bottom_right_x
@@ -25,19 +25,19 @@ class Rectangle
   end
 
   def top_left_x_view
-    top_left_x + camera.view_position.x
+    top_left_x + view.drawing_position.x
   end
 
   def top_left_y_view
-    top_left_y + camera.view_position.y
+    top_left_y + view.drawing_position.y
   end
 
   def bottom_right_x_view
-    bottom_right_x + camera.view_position.x
+    bottom_right_x + view.drawing_position.x
   end
 
   def bottom_right_y_view
-    bottom_right_y + camera.view_position.y
+    bottom_right_y + view.drawing_position.y
   end
 
   def intersect?(rectangle)
@@ -51,25 +51,25 @@ class Rectangle
   end
 
   def intersect_view?(rectangle)
-    x_min = [top_left_x_view, rectangle.top_left_x].max
-    y_min = [top_left_y_view, rectangle.top_left_y].max
+    x_min = [top_left_x_view, rectangle.top_left_x_view].max
+    y_min = [top_left_y_view, rectangle.top_left_y_view].max
 
-    x_max = [bottom_right_x_view, rectangle.bottom_right_x].min
-    y_max = [bottom_right_y_view, rectangle.bottom_right_y].min
+    x_max = [bottom_right_x_view, rectangle.bottom_right_x_view].min
+    y_max = [bottom_right_y_view, rectangle.bottom_right_y_view].min
 
     x_min < x_max && y_min < y_max
   end
 
-  def intersect_x?(rectangle)
-    x_min = [top_left_x, rectangle.top_left_x].max
-    x_max = [bottom_right_x, rectangle.bottom_right_x].min
+  def intersect_x_view?(rectangle)
+    x_min = [top_left_x_view, rectangle.top_left_x_view].max
+    x_max = [bottom_right_x_view, rectangle.bottom_right_x_view].min
 
     x_min < x_max
   end
 
-  def intersect_y?(rectangle)
-    y_min = [top_left_y_view, rectangle.top_left_y].max
-    y_max = [bottom_right_y_view, rectangle.bottom_right_y].min
+  def intersect_y_view?(rectangle)
+    y_min = [top_left_y_view, rectangle.top_left_y_view].max
+    y_max = [bottom_right_y_view, rectangle.bottom_right_y_view].min
 
     y_min < y_max
   end
