@@ -6,6 +6,7 @@ require './lib/entities/player/player'
 require './lib/entities/map/map'
 require './lib/entities/statistic/statistic'
 require './lib/entities/camera/camera'
+require './lib/entities/goal/goal'
 require './lib/architecture/position'
 require './lib/architecture/input'
 require './lib/architecture/view'
@@ -27,12 +28,16 @@ class JumpyRuns < Gosu::Window
         @map_view = View.new(@map_position, @drawing_position, 1)
         @map = Map.new(@map_view, @input_x, @input_y, self)
 
+        @goal_position = @map.get_goal_position
+        @goal_position.update_delta(8, -16)
+        @goal_view = View.new(@goal_position, @drawing_position, 1)
+        @goal = Goal.new(@goal_view, @input_x, @input_y, self)
+
         @statistic_map_position = Position.new(0, 0, :none)
         @statistic_drawing_position = Position.new(0, 0, :none)
         @statistic_view = View.new(@statistic_map_position, @statistic_drawing_position)
         @statistic = Statistic.new(@statistic_view, @input_x, @input_y, self)
 
-        #@player_position = Position.new(30 - 16, self.height - 96, :right)
         @player_position = @map.get_start_position
         @player_position.update_delta(16, -96)
         @player_view = View.new(@player_position, @drawing_position, 1)
@@ -72,6 +77,7 @@ class JumpyRuns < Gosu::Window
         @statistic.draw
         @player.draw
         @camera.draw
+        @goal.draw
     end
 end
 

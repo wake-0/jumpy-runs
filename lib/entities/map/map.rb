@@ -36,6 +36,10 @@ class Map < GameObject
         Position.new(450, 300, :right)
     end
 
+    def get_goal_position
+        Position.new(200, 50, :none)
+    end
+
     private
     def create_obstacles(window)
         @obstacle_position1 = Position.new(100, 450)
