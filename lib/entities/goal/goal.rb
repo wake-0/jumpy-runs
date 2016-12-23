@@ -8,8 +8,12 @@ class Goal < GameObject
   def initialize (view, input_x, input_y, window)
     super(view, input_x, input_y, window)
 
-    goal_graphic = GoalGraphic.new(view, window)
-    add_component(goal_graphic)
+    @goal_graphic = GoalGraphic.new(view, window)
+    add_component(@goal_graphic)
+  end
+
+  def rectangle
+     @goal_graphic.rectangle
   end
 
 end
