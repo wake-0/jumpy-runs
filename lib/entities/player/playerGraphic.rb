@@ -5,8 +5,10 @@ require './lib/architecture/rectangle'
 class PlayerGraphic < GraphicalComponent
 
         def initialize(view, window, player_setting)
-        super(view, window, 32, 32)
-        @image = Gosu::Image.load_tiles(@window, './resources/characters.png', width, height, false)
+        super(view, window, 20, 26)
+        @cut_width = 6
+        @cut_height  = 6
+        @image = Gosu::Image.load_tiles(@window, './resources/characters.png', width + 2*@cut_width, height + @cut_height, false)
         # Character selection
         @player_setting = player_setting
         set_character_offset
@@ -28,7 +30,11 @@ class PlayerGraphic < GraphicalComponent
       end
 
       # Draw image in left or right direction
-      image = @image[@frame]
+      uncut_image = @image[@frame]
+
+      # Subimage for better fit
+      image = uncut_image.subimage(@cut_width, @cut_height, width, height)
+
       if @position_direction == :right
           image.draw(rectangle.top_left_x_view, rectangle.top_left_y_view, 1, view.zoom_factor, view.zoom_factor)
       elsif @position_direction == :left

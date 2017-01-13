@@ -4,10 +4,8 @@ class Camera
     @drawing_position = drawing_position
     @window = window
 
-    # @width = window.width - 200
-    # @height = window.height - 200
-    @width = 200
-    @height = 200
+    @width = window.width - 200
+    @height = window.height - 200
 
     # This is the center rectangle
     camera_drawing_position = Position.new(0, 0, :none)

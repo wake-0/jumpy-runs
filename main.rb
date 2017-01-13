@@ -41,7 +41,7 @@ class JumpyRuns < Gosu::Window
 
       @player_position = @map.get_start_position
       @player_position.update_delta(16, -96)
-      @player_view = View.new(@player_position, @drawing_position, 1)
+      @player_view = View.new(@player_position, @drawing_position)
       @player = Player.new(@player_view, @input_x, @input_y, self, @map, 1)
 
       @camera = Camera.new(@drawing_position, self)
