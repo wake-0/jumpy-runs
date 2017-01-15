@@ -2,6 +2,7 @@
 require 'gosu'
 
 # For import the file name is used instead of the class name
+require './lib/entities/player/playerFactory'
 require './lib/entities/player/player'
 require './lib/entities/map/map'
 require './lib/entities/statistic/statistic'
@@ -39,10 +40,7 @@ class JumpyRuns < Gosu::Window
       @statistic_view = View.new(@statistic_map_position, @statistic_drawing_position)
       @statistic = Statistic.new(@statistic_view, @input_x, @input_y, self)
 
-      @player_position = @map.get_start_position
-      @player_position.update_delta(16, -96)
-      @player_view = View.new(@player_position, @drawing_position)
-      @player = Player.new(@player_view, @input_x, @input_y, self, @map, 1)
+      @player = PlayerFactory.create_player(@map.get_start_position, @drawing_position, @input_x, @input_y, @map, self)
 
       @camera = Camera.new(@drawing_position, self)
 
