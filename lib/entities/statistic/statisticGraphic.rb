@@ -9,7 +9,7 @@ class StatisticGraphic < GraphicalComponent
     @font = Gosu::Font.new(window , statistic_settings.font_name, statistic_settings.font_size)
   end
 
-  def draw
+  def draw(game_finished)
     @font.draw('Play time:' + play_time, rectangle.top_left_x_view, rectangle.top_left_y_view, 1, view.zoom_factor, view.zoom_factor)
 
     rectangle.draw(@window) if $debug_mode

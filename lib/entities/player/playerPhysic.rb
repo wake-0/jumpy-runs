@@ -12,7 +12,7 @@ class PlayerPhysic < PhysicalComponent
         @highest_point_reached = false
     end
     
-    def update
+    def update(game_finished)
         position = view.map_position
         delta_x = 0
         delta_y = 0

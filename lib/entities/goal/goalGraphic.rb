@@ -9,7 +9,7 @@ class GoalGraphic < GraphicalComponent
     @image = Gosu::Image.load_tiles window, './resources/sheet.png', width, height, false
   end
 
-  def draw
+  def draw(game_finished)
     frame = 14
     image = @image[frame]
     image.draw(rectangle.top_left_x_view, rectangle.top_left_y_view, 1, view.zoom_factor, view.zoom_factor)

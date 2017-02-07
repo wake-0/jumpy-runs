@@ -21,7 +21,7 @@ class GraphicalComponent < Component
         height * view.zoom_factor
     end
 
-    def draw
+    def draw(game_finished)
     end
 
     def in_range?(rect)

@@ -16,12 +16,12 @@ class GameObject
         @window = window
     end
 
-    def draw
-        @graphical_components.each { |c| c.draw }
+    def draw(game_finished)
+        @graphical_components.each { |c| c.draw(game_finished) }
     end
 
-    def update
-        @physical_components.each { |c| c.update }
+    def update(game_finished)
+        @physical_components.each { |c| c.update(game_finished) }
     end
 
     def add_component(component)

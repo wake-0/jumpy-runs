@@ -15,6 +15,8 @@ require './lib/architecture/view'
 
 class JumpyRuns < Gosu::Window
 
+    attr_reader :game_finished
+
     def initialize(width = 800, height = 600, fullscreen = false)
       super
       $debug_mode = true
@@ -72,17 +74,17 @@ class JumpyRuns < Gosu::Window
           @input_y.update(:none, 0)
       end
 
-      @player.update
+      @player.update(game_finished)
       @camera.update(@player.rectangle)
       @game_finished = @game_controller.finished?
     end
 
     def draw
-        @map.draw
-        @statistic.draw
-        @player.draw
-        @camera.draw
-        @goal.draw
+        @map.draw(game_finished)
+        @statistic.draw(game_finished)
+        @player.draw(game_finished)
+        @camera.draw(game_finished)
+        @goal.draw(game_finished)
         @game_controller.draw
     end
 end

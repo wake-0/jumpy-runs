@@ -26,7 +26,7 @@ class Camera
     @drawing_position.update_delta(-delta_x, -delta_y)
   end
 
-  def draw
+  def draw(game_finished)
     @rectangle.draw(@window) if $debug_mode
   end
 

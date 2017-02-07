@@ -15,12 +15,12 @@ class PlayerGraphic < GraphicalComponent
         @frame = @character_offset
     end
 
-    def draw
+    def draw(game_finished)
       position = view.map_position
 
       # Check if the x position has changed then the
       # image also should change
-      if position.has_changed_in_x?
+      if position.has_changed_in_x? && !game_finished
           @frame = @character_offset + (@frame + 1) % 18
       end
 

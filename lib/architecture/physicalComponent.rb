@@ -9,7 +9,7 @@ class PhysicalComponent < Component
         @graphical_component = graphical_component
     end
 
-    def update
+    def update(game_finished)
     end
 
 end

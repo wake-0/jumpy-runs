@@ -9,7 +9,7 @@ class MapBackgroundGraphic < GraphicalComponent
         @color2 ||= Gosu::Color.new(0xaa123452)
     end
 
-    def draw
+    def draw(game_finished)
         draw_background_color
     end
 
